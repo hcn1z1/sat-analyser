@@ -60,9 +60,8 @@ def main():
     elif core.globals.algorithm == "SAT-2-3SAT":
         if core.globals.logs == "info": 
             print("\n[INFO] Performing SAT → 3-SAT reduction...")
-            print("[TODO] SAT->3SAT reduction code goes here.")
-            algorithm = [reduce_sat_to_3sat,(clauses,nb_vars)]
-            generator = [generate_random_sat_instance,(core.globals.clause_size_min,core.globals.clause_size_max)]
+        algorithm = [reduce_sat_to_3sat,(clauses,nb_vars)]
+        generator = [generate_random_sat_instance,(core.globals.clause_size_min,core.globals.clause_size_max)]
     else:
         raise Exception("algorithm can either be SAT,3SAT or SAT-2-3SAT")
         
