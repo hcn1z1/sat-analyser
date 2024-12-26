@@ -34,4 +34,4 @@ def solve_3sat(clauses: List[List[int]], nb_vars: int) -> Dict[int, bool] | None
     if backtrack(1):
         return assignment
     else:
-        return None
+        return {}

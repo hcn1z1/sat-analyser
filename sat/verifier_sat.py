@@ -7,6 +7,7 @@ def verify_sat_solution(clauses: List[List[int]], assignment: Dict[int, bool]) -
     :param assignment: dictionnaire { var_index -> bool } 
     :return: True si l'affectation satisfait la formule, False sinon
     """
+    if assignment == {}: return False
     for clause in clauses:
         satisfied = False
         for literal in clause:

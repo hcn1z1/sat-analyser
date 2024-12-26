@@ -88,7 +88,7 @@ def main():
             print("[INFO] Graph generation is enabled.")
     if not looping: return
     
-    x,y = [],[] # nb_clauser,execution time / memory usage
+    x,y,z = [],[],[] # nb_clauser,execution time / memory usage / accuracy
     total_iterations = len(range(3, core.globals.test_number, core.globals.step))
     if TQDM_AVAILABLE:
         iterator = tqdm(range(3, core.globals.test_number, core.globals.step), desc="Running Tests", unit="test")
@@ -109,7 +109,9 @@ def main():
             x.append(nb_clauses)
             y.append(memory_consumption) 
             metric = f"Memory: {memory_consumption:.4f}MB"
-
+            
+        z.append(1 if verify_sat_solution(clauses,result) else 0)
+        
         if TQDM_AVAILABLE:
             tqdm.write(f"Test {idx}/{total_iterations} - Clauses: {nb_clauses}, {metric}")
         else:
@@ -130,7 +132,7 @@ def main():
     if core.globals.graph:
         plt.figure(figsize=(10, 6))
         if core.globals.analyser == "TIME":
-            plt.plot(x, y, marker='o', linestyle='-', color='b', label='Execution Time (s)')
+            plt.plot(x, y, marker='o', linestyle='-', color='b', label=f'Execution Time (s) / Accuracy = {(sum(z)/len(z)):4f}')
         elif core.globals.analyser == "MEMORY":
             plt.plot(x, y, marker='s', linestyle='--', color='r', label='Memory Consumption (MB)')
         
